@@ -25,8 +25,10 @@ let package = Package(
         // 注意：需要使用 9.0.0+ 版本以支持 signInWithPresentingViewController:hint:additionalScopes:nonce:completion: API
         // 本地配置使用的是 9.0.0 版本，确保 API 兼容性
         // 官方 SPM 包可能包含 AppCheck 和 GoogleUtilities（用于 App Attest 功能）
-        // 如果与 Firebase 有依赖冲突，可考虑使用本地优化版本（已移除 AppCheck）
-        .package(url: "https://github.com/google/GoogleSignIn-iOS.git", from: "9.0.0"),
+        // 使用精确版本 9.0.0 以确保与 firebase-ios-sdk 11.0.0+ 的兼容性
+        // GoogleSignIn-iOS 9.0.0 需要 app-check 11.0.0+ 和 gtm-session-fetcher 3.3.0+
+        // firebase-ios-sdk 11.0.0+ 也使用相同的依赖版本，因此兼容
+        .package(url: "https://github.com/google/GoogleSignIn-iOS.git", .upToNextMajor(from: "9.0.0")),
     ],
     targets: [
         .binaryTarget(
