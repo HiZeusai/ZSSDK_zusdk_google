@@ -22,9 +22,11 @@ let package = Package(
         //   - AppAuth / AppAuthCore
         //   - GTMAppAuth  
         //   - GTMSessionFetcherCore
-        // 注意：官方 SPM 包可能包含 AppCheck 和 GoogleUtilities（用于 App Attest 功能）
+        // 注意：需要使用 9.0.0+ 版本以支持 signInWithPresentingViewController:hint:additionalScopes:nonce:completion: API
+        // 本地配置使用的是 9.0.0 版本，确保 API 兼容性
+        // 官方 SPM 包可能包含 AppCheck 和 GoogleUtilities（用于 App Attest 功能）
         // 如果与 Firebase 有依赖冲突，可考虑使用本地优化版本（已移除 AppCheck）
-        .package(url: "https://github.com/google/GoogleSignIn-iOS.git", from: "7.0.0"),
+        .package(url: "https://github.com/google/GoogleSignIn-iOS.git", from: "9.0.0"),
     ],
     targets: [
         .binaryTarget(
